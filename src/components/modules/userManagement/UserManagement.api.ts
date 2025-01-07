@@ -2,7 +2,7 @@ import { IParams } from '@/shared/shared-interfaces';
 import axiosFactory from '@/shared/config/axios-interceptor';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export interface IExpertSearchParams extends IParams {}
+export interface IExpertSearchParams extends IParams { }
 
 export const getEntities = createAsyncThunk(`get-list-user`, async (_, thunkAPI) => {
   try {
@@ -21,20 +21,19 @@ export const createEntity = createAsyncThunk(`create-expert`, async (body: any, 
     return thunkAPI.rejectWithValue(error);
   }
 });
-
-export const getTokenHold = createAsyncThunk(`country-expert-condition/detail`, async (params: string, thunkAPI) => {
+export const updateEntity = createAsyncThunk(`update-user`, async (body: any, thunkAPI) => {
   try {
-    const { data } = await axiosFactory.get(`country-expert-condition/detail?countryCode=${params}`);
+    const { data } = await axiosFactory.put(`users/${body.id}`, body);
     return data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error);
   }
 });
 
-export const cancelExpert = createAsyncThunk(`cancel-expert`, async (id: number, thunkAPI) => {
+export const removeEntity = createAsyncThunk(`remove-user`, async (id: string, thunkAPI) => {
   try {
-    const { data } = await axiosFactory.put(`admin/user/cancel-expert/${id}`);
-    return data;
+    await axiosFactory.delete(`users/${id}`);
+    return id;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error);
   }

@@ -1,8 +1,8 @@
 import { RootState } from '@/reducers';
-import { IInitialState, IResponseList } from '@/shared/shared-interfaces';
+import { IInitialState } from '@/shared/shared-interfaces';
 import { PayloadAction, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { createEntity, getEntities } from './UserManagement.api';
+import { createEntity, getEntities, removeEntity, updateEntity } from './UserManagement.api';
 import { IUser } from '@/shared/model/user.model';
 
 export const initialExpertFilter = {
@@ -77,6 +77,26 @@ const { actions, reducer } = createSlice({
       state.initialState.errorMessage = payload?.message;
       state.initialState.errorCode = payload?.code;
       state.initialState.updateEntitySuccess = false;
+      state.initialState.loading = false;
+    });
+    builder.addCase(updateEntity.fulfilled.type, (state, _) => {
+      state.initialState.updateEntitySuccess = true;
+      state.initialState.loading = false;
+    });
+    builder.addCase(updateEntity.rejected.type, (state, { payload }: PayloadAction<any>) => {
+      state.initialState.errorMessage = payload?.message;
+      state.initialState.errorCode = payload?.code;
+      state.initialState.updateEntitySuccess = false;
+      state.initialState.loading = false;
+    });
+    builder.addCase(removeEntity.fulfilled.type, (state, _) => {
+      state.initialState.deleteEntitySuccess = true;
+      state.initialState.loading = false;
+    });
+    builder.addCase(removeEntity.rejected.type, (state, { payload }: PayloadAction<any>) => {
+      state.initialState.errorMessage = payload?.message;
+      state.initialState.errorCode = payload?.code;
+      state.initialState.deleteEntitySuccess = false;
       state.initialState.loading = false;
     });
   },
