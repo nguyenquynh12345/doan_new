@@ -1,0 +1,28 @@
+.dropdown-menu {
+  //   --cui-dropdown-zindex: #{$zindex-dropdown};
+  //   --cui-dropdown-min-width: #{$dropdown-min-width};
+  --cui-dropdown-padding-x: var(--spacing-md);
+  --cui-dropdown-padding-y: var(--spacing-md);
+  //   --cui-dropdown-spacer: #{$dropdown-spacer};
+  //   @include rfs($dropdown-font-size, --cui-dropdown-font-size);
+  --cui-dropdown-color: var(--gray-200);
+  --cui-dropdown-bg: var(--gray-900);
+  --cui-dropdown-border-color: var(--gray-600);
+  --cui-dropdown-border-radius: var(--radius-2xl);
+  //   --cui-dropdown-border-width: #{$dropdown-border-width};
+  --cui-dropdown-item-border-radius: var(--radius-md);
+  --cui-dropdown-divider-bg: var(--gray-700);
+//   --cui-dropdown-divider-margin-y: #{$dropdown-divider-margin-y};
+  //   --cui-dropdown-box-shadow: #{$dropdown-box-shadow};
+  --cui-dropdown-link-color: var(--gray-200);
+  --cui-dropdown-link-hover-color: var(--gray-200);
+  --cui-dropdown-link-hover-bg: var(--gray-800);
+  --cui-dropdown-link-active-color: var(--gray-200);
+  --cui-dropdown-link-active-bg: var(--gray-800);
+  //   --cui-dropdown-link-disabled-color: #{$dropdown-link-disabled-color};
+  --cui-dropdown-item-padding-x: var(--spacing-md);
+  --cui-dropdown-item-padding-y: var(--spacing-md);
+  //   --cui-dropdown-header-color: #{$dropdown-header-color};
+  //   --cui-dropdown-header-padding-x: #{$dropdown-header-padding-x};
+  //   --cui-dropdown-header-padding-y: #{$dropdown-header-padding-y};
+}

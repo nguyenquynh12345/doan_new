@@ -1,0 +1,63 @@
+$gutters: (
+  0: 0rem,
+  1: 0.125rem,
+  2: 0.25rem,
+  3: 0.375rem,
+  4: 0.5rem,
+  5: 0.75rem,
+  6: 1rem,
+  7: 1.25rem,
+  8: 1.5rem,
+  9: 2rem,
+  10: 2.5rem,
+  11: 3rem,
+  12: 4rem,
+  13: 5rem,
+  14: 6rem,
+  15: 8rem,
+  16: 10rem,
+);
+
+// from value overide
+// Input
+$input-padding-y: $spacing-lg !default;
+$input-padding-x: $spacing-xl !default;
+
+$input-bg: var(--gray-800) !default;
+$input-color: var(--gray-25) !default;
+$input-border-color: var(--gray-700) !default;
+$input-border-radius: var(--radius-md) !default;
+
+// $input-border-width: $input-btn-border-width !default;
+// $input-box-shadow: var(--cui-box-shadow-inset) !default;
+
+// $input-border-radius-sm: var(--cui-border-radius-sm) !default;
+// $input-border-radius-lg: var(--cui-border-radius-lg) !default;
+
+$input-disabled-color: var(--gray-500) !default;
+$input-disabled-bg: var(--gray-900) !default;
+$input-disabled-border-color: var(--gray-800) !default;
+
+$input-focus-bg: var(--gray-700) !default;
+$input-focus-border-color: var(--gray-100) !default;
+$input-focus-color: var(--gray-25) !default;
+// $input-focus-width: $input-btn-focus-width !default;
+$input-focus-box-shadow: none;
+
+$input-placeholder-color: var(--gray-400) !default;
+$input-plaintext-color: var(--gray-25) !default;
+
+$input-group-addon-padding-y: $spacing-md !default;
+$input-group-addon-padding-x: $spacing-xl !default;
+$input-group-addon-color: var(--gray-25) !default;
+$input-group-addon-bg: var(--gray-800) !default;
+$input-group-addon-border-color: var(--gray-700) !default;
+// $input-bg: red;
+
+// Select
+$form-select-indicator-color: $gray-25;
+
+// Check box
+$form-check-input-width: 1.25em !default;
+$form-check-input-checked-color: $brand-950 !default;
+$form-check-input-indeterminate-color: $brand-950 !default;

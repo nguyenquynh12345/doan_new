@@ -1,0 +1,21 @@
+{
+  "enum": {
+    "experience": {
+      "yearsRange": "{{range}} năm"
+    },
+    "role": {
+      "investor": "Nhà đầu tư",
+      "leader": "Leader",
+      "expert": "Chuyên gia",
+      "holding": "Tổng Holding",
+      "national_director": "Quốc gia nhượng quyền",
+      "admin": "Quản trị viên"
+    },
+    "questionType": {
+      "qa_expert": "Q&A Chuyên gia",
+      "qa_leader": "Q&A Leader",
+      "qa_investor": "Q&A Nhà đầu tư",
+      "faq": "FAQ"
+    }
+  }
+}

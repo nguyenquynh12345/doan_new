@@ -1,0 +1,36 @@
+.step-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .step-pill {
+    @extend .text-sm-medium;
+    color: var(--gray-25);
+    display: flex;
+    padding: var(--spacing-md) var(--spacing-lg);
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    border-radius: 360px;
+    border: 1px solid var(--gray-700);
+    background-color: var(--gray-800);
+    &.active {
+      border: 1px solid var(--brand-400);
+      background-color: var(--brand-950);
+    }
+  }
+  .step-line {
+    width: var(--spacing-3xl);
+    height: 1px;
+    background-color: var(--gray-700);
+    &.active {
+      background-color: var(--brand-400);
+    }
+  }
+
+  @media (max-width: 575.9px) {
+    .step-line {
+      width: var(--spacing-md) !important;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+.date-picker {
+  //Color schema
+  --cui-tertiary-color: var(--gray-300);
+  --cui-date-picker-placeholder-color: var(--gray-400);
+
+  // Icon
+  --cui-date-picker-indicator-icon: #{escape-svg($date-picker-indicator-icon)};
+  --cui-date-picker-indicator-icon-color: var(--gray-300);
+  --cui-date-picker-indicator-icon-size: #{$date-picker-indicator-icon-size};
+
+  --cui-date-picker-cleaner-icon: #{escape-svg($date-picker-cleaner-icon)};
+  --cui-date-picker-cleaner-icon-color: var(--gray-300);
+  --cui-date-picker-cleaner-icon-hover-color: var(--gray-25);
+  --cui-date-picker-cleaner-icon-size: #{$date-picker-cleaner-icon-size};
+
+  --cui-date-picker-separator-icon: #{escape-svg($date-picker-separator-icon)};
+  --cui-date-picker-separator-icon-rtl: #{escape-svg($date-picker-separator-icon-rtl)};
+  --cui-date-picker-separator-icon-size: #{$date-picker-separator-icon-size};
+
+  // Dropdown
+  --cui-date-picker-dropdown-bg: var(--gray-800);
+  --cui-date-picker-dropdown-border-width: #{$date-picker-dropdown-border-width};
+  --cui-date-picker-dropdown-border-color: var(--gray-700);
+  --cui-date-picker-dropdown-border-radius: #{$date-picker-dropdown-border-radius};
+  --cui-date-picker-dropdown-box-shadow: #{$date-picker-dropdown-box-shadow};
+
+  // ranges
+  --cui-date-picker-ranges-width: #{$date-picker-ranges-width};
+  --cui-date-picker-ranges-padding: #{$date-picker-ranges-padding};
+  --cui-date-picker-ranges-border-width: #{$date-picker-ranges-border-width};
+  --cui-date-picker-ranges-border-color: var(--gray-700);
+
+  // timepicker
+  --cui-date-picker-timepicker-width: 100%;
+  --cui-date-picker-timepicker-border-color: var(--gray-700);
+  --cui-date-picker-timepicker-border-top: #{$date-picker-timepicker-border-width} solid var(--cui-date-picker-timepicker-border-color);
+
+  // footer
+  --cui-date-picker-footer-padding: #{$date-picker-footer-padding};
+  --cui-date-picker-footer-border-width: #{$date-picker-footer-border-width};
+  --cui-date-picker-footer-border-color: var(--gray-700);
+
+  /*
+  * calendar
+  */
+  .date-picker-body {
+    .calendar {
+      // spacing
+      --cui-calendar-table-margin: #{$calendar-table-margin};
+      // --cui-calendar-table-cell-size: #{$calendar-table-cell-size};
+      --cui-calendar-table-cell-size: 2.2rem;
+      
+      --cui-calendar-nav-padding: #{$calendar-nav-padding};
+
+      // nav styler
+      --cui-calendar-nav-border-color: var(--gray-700);
+      --cui-calendar-nav-border: #{$calendar-nav-border-width} solid var(--cui-calendar-nav-border-color);
+      --cui-calendar-nav-date-color: var(--gray-25);
+      --cui-calendar-nav-date-hover-color: #{$calendar-nav-date-hover-color};
+
+      // nav icon
+      --cui-calendar-nav-icon-width: #{$calendar-nav-icon-width};
+      --cui-calendar-nav-icon-height: #{$calendar-nav-icon-height};
+      --cui-calendar-nav-icon-double-next: #{escape-svg($calendar-nav-icon-double-next)};
+      --cui-calendar-nav-icon-double-prev: #{escape-svg($calendar-nav-icon-double-prev)};
+      --cui-calendar-nav-icon-next: #{escape-svg($calendar-nav-icon-next)};
+      --cui-calendar-nav-icon-prev: #{escape-svg($calendar-nav-icon-prev)};
+      --cui-calendar-nav-icon-color: var(--gray-25);
+      --cui-calendar-nav-icon-hover-color: var(--brand-400);
+
+      // cell styler
+      --cui-calendar-cell-header-inner-color: var(--gray-500);
+      --cui-calendar-cell-week-number-color: var(--gray-500);
+      --cui-calendar-cell-hover-color: #{$calendar-cell-hover-color};
+      --cui-calendar-cell-hover-bg: #{$calendar-cell-hover-bg};
+      --cui-calendar-cell-focus-box-shadow: #{$calendar-cell-focus-box-shadow};
+      --cui-calendar-cell-disabled-color: var(--gray-700);
+      --cui-calendar-cell-selected-color: #{$calendar-cell-selected-color};
+      --cui-calendar-cell-selected-bg: #{$calendar-cell-selected-bg};
+      --cui-calendar-cell-range-bg: #{$calendar-cell-range-bg};
+      --cui-calendar-cell-range-hover-bg: #{$calendar-cell-range-hover-bg};
+      --cui-calendar-cell-range-hover-border-color: #{$calendar-cell-range-hover-border-color};
+      --cui-calendar-cell-today-color: #{$calendar-cell-today-color};
+      --cui-calendar-cell-week-number-color: #{$calendar-cell-week-number-color};
+      &.days {
+        .calendar-nav {
+          // .calendar-nav-date {
+            .btn {
+              &.btn-sm {
+                --cui-btn-padding-y: 0.25rem;
+                --cui-btn-padding-x: 0.3rem;
+                --cui-btn-font-size: 0.75rem;
+                --cui-btn-border-radius: var(--radius-md);
+              }
+            }
+          // }
+        }
+      }
+    }
+
+    .date-picker-timepickers {
+      .time-picker-inline-select {
+        option {
+          background-color: var(--gray-900);
+        }
+      }
+    }
+  }
+}

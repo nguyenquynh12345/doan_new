@@ -1,0 +1,21 @@
+{
+  "enum": {
+    "experience": {
+      "yearsRange": "{{range}} years"
+    },
+    "role": {
+      "investor": "Investor",
+      "leader": "Leader",
+      "expert": "Expert",
+      "holding": "Holding Director",
+      "national_director": "National Director",
+      "admin": "Admin"
+    },
+    "questionType": {
+      "qa_expert": "Q&A Expert",
+      "qa_leader": "Q&A Leader",
+      "qa_investor": "Q&A Investor",
+      "faq": "FAQ"
+    }
+  }
+}

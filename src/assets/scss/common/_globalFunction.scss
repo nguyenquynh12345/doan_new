@@ -1,0 +1,270 @@
+@use 'sass:math';
+
+/**
+ * Remove units from a number
+ */
+@function strip-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+/**
+ * Exchange value to rem
+ */
+@function toRem($pxval, $base: 16) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+
+  @return calc($pxval / $base) * 1rem;
+}
+
+/**
+ * Exchange value to negative or positive
+ */
+@function exchagneValue($value, $positive) {
+  @if $positive == true {
+    @return ($value);
+  } @else {
+    @return ($value) * -1;
+  }
+}
+
+/**
+ * Convert value to spacing
+ * value unit 
+ * none
+ * xxs
+ * xs
+ * sm
+ * md
+ * lg
+ * xl
+ * 2xl
+ * 3xl
+ * 4xl
+ * 5xl
+ * 6xl
+ * 7xl
+ * 8xl
+ * 9xl
+ * 10xl
+ * 11xl
+ */
+@function convertSpacing($value, $positive) {
+  @if $value == none {
+    @return exchagneValue($spacing-none, $positive);
+  }
+  @if $value == xxs {
+    @return exchagneValue($spacing-xxs, $positive);
+  }
+  @if $value == xs {
+    @return exchagneValue($spacing-xs, $positive);
+  }
+  @if $value == sm {
+    @return exchagneValue($spacing-sm, $positive);
+  }
+  @if $value == md {
+    @return exchagneValue($spacing-md, $positive);
+  }
+  @if $value == lg {
+    @return exchagneValue($spacing-lg, $positive);
+  }
+  @if $value == xl {
+    @return exchagneValue($spacing-xl, $positive);
+  }
+  @if $value == 2xl {
+    @return exchagneValue($spacing-2xl, $positive);
+  }
+  @if $value == 3xl {
+    @return exchagneValue($spacing-3xl, $positive);
+  }
+  @if $value == 4xl {
+    @return exchagneValue($spacing-4xl, $positive);
+  }
+  @if $value == 5xl {
+    @return exchagneValue($spacing-5xl, $positive);
+  }
+  @if $value == 6xl {
+    @return exchagneValue($spacing-6xl, $positive);
+  }
+  @if $value == 7xl {
+    @return exchagneValue($spacing-7xl, $positive);
+  }
+  @if $value == 8xl {
+    @return exchagneValue($spacing-8xl, $positive);
+  }
+  @if $value == 9xl {
+    @return exchagneValue($spacing-9xl, $positive);
+  }
+  @if $value == 10xl {
+    @return exchagneValue($spacing-10xl, $positive);
+  }
+  @if $value == 11xl {
+    @return exchagneValue($spacing-11xl, $positive);
+  }
+}
+
+/**
+ * Convert value to gap
+ */
+@mixin gap-convert($paddingValue: none, $positive: true) {
+  gap: convertSpacing($paddingValue, $positive) !important;
+}
+
+/**
+ * Convert value to padding
+ */
+@mixin padding-convert($paddingValue: none, $property: a, $positive: true) {
+  @if $property == t {
+    padding-top: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == b {
+    padding-bottom: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == s {
+    padding-left: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == e {
+    padding-right: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == y {
+    padding-top: convertSpacing($paddingValue, $positive) !important;
+    padding-bottom: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == x {
+    padding-right: convertSpacing($paddingValue, $positive) !important;
+    padding-left: convertSpacing($paddingValue, $positive) !important;
+  }
+  @if $property == a {
+    padding: convertSpacing($paddingValue, $positive) !important;
+  }
+}
+
+/**
+ * Convert value to margin
+ */
+@mixin margin-convert($marginValue: none, $property: a, $positive: true) {
+  @if $property == t {
+    margin-top: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == b {
+    margin-bottom: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == s {
+    margin-left: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == e {
+    margin-right: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == y {
+    margin-top: convertSpacing($marginValue, $positive) !important;
+    margin-bottom: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == x {
+    margin-right: convertSpacing($marginValue, $positive) !important;
+    margin-left: convertSpacing($marginValue, $positive) !important;
+  }
+  @if $property == a {
+    margin: convertSpacing($marginValue, $positive) !important;
+  }
+}
+
+/**
+ * Convert value to radius
+ * value unit 
+ * none
+ * xxs
+ * xs
+ * sm
+ * md
+ * lg
+ * xl
+ * 2xl
+ * 3xl
+ * 4xl
+ */
+@function convertRadius($value, $positive) {
+  @if $value == none {
+    @return exchagneValue($radius-none, $positive);
+  }
+  @if $value == xxs {
+    @return exchagneValue($radius-xxs, $positive);
+  }
+  @if $value == xs {
+    @return exchagneValue($radius-xs, $positive);
+  }
+  @if $value == sm {
+    @return exchagneValue($radius-sm, $positive);
+  }
+  @if $value == md {
+    @return exchagneValue($radius-md, $positive);
+  }
+  @if $value == lg {
+    @return exchagneValue($radius-lg, $positive);
+  }
+  @if $value == xl {
+    @return exchagneValue($radius-xl, $positive);
+  }
+  @if $value == 2xl {
+    @return exchagneValue($radius-2xl, $positive);
+  }
+  @if $value == 3xl {
+    @return exchagneValue($radius-3xl, $positive);
+  }
+  @if $value == 4xl {
+    @return exchagneValue($radius-4xl, $positive);
+  }
+}
+
+/**
+ * Convert value to margin
+ */
+@mixin radius-convert($radius: none, $property: a, $positive: true) {
+  @if $property == top {
+    border-top-left-radius: convertRadius($radius, $positive) !important;
+    border-top-right-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == top-left {
+    border-top-left-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == top-right {
+    border-top-right-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == bottom {
+    border-bottom-left-radius: convertRadius($radius, $positive) !important;
+    border-bottom-right-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == bottom-left {
+    border-bottom-left-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == bottom-right {
+    border-bottom-right-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == left {
+    border-start-start-radius: convertRadius($radius, $positive) !important;
+    border-start-end-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == left-start {
+    border-start-start-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == left-end {
+    border-start-end-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == right {
+    border-end-start-radius: convertRadius($radius, $positive) !important;
+    border-end-end-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == right-start {
+    border-end-start-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == right-end {
+    border-end-end-radius: convertRadius($radius, $positive) !important;
+  }
+  @if $property == a {
+    border-radius: convertRadius($radius, $positive) !important;
+  }
+}

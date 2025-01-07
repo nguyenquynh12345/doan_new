@@ -1,0 +1,19 @@
+//declare global css value
+@import 'common/index';
+
+// If you want to override variables do it here
+@import 'scssVariables';
+
+$enable-ltr: true;
+$enable-rtl: true;
+
+// Import CoreUI for React components library
+@import '@coreui/coreui-pro/scss/coreui';
+
+@import 'cssVariables';
+
+@import 'components/index';
+
+@import 'views/index';
+
+@import 'Global';

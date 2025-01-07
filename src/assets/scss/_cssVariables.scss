@@ -1,0 +1,21 @@
+:root {
+  --cui-primary: var(--brand-400);
+  --cui-secondary: var(--gray-500);
+  --cui-success: var(--success-500);
+  --cui-info: var(--info-500);
+  --cui-warning: var(--warning-500);
+  --cui-danger: var(--danger-500);
+  --cui-light: var(--gray-25);
+  --cui-dark: var(--gray-950);
+  --cui-primary-rgb: 133, 225, 58;
+  --cui-secondary-rgb: 105, 117, 134;
+  --cui-success-rgb: 21, 183, 158;
+  --cui-info-rgb: 97, 114, 243;
+  --cui-warning-rgb: 234, 170, 8;
+  --cui-danger-rgb: 240, 68, 56;
+  --cui-light-rgb: 252, 252, 253;
+  --cui-dark-rgb: 21, 41, 10;
+  --cui-medium-emphasis: var(--gray-300);
+
+  --toastify-color-dark: var(--gray-700) !important;
+}

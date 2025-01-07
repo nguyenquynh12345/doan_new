@@ -1,0 +1,12 @@
+
+
+.auth-fixed-country {
+  @extend .text-md-medium;
+  color: var(--gray-200);
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background-color: var(--info-900);
+  border-radius: var(--radius-md);
+}

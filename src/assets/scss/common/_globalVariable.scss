@@ -1,0 +1,257 @@
+:root {
+  // Base spacing
+  --base-rems: 16px;
+
+  // Base color
+  --base-white: #ffffff;
+  --base-black: #000000;
+
+  // brand color
+  --brand-25: #fafef5;
+  --brand-50: #f3fee7;
+  --brand-100: #e6fcd0;
+  --brand-200: #d0f8ab;
+  --brand-300: #a6ef67;
+  --brand-400: #85e13a;
+  --brand-500: #66c61c;
+  --brand-600: #4ca30d;
+  --brand-700: #3b7c0f;
+  --brand-800: #326212;
+  --brand-900: #2b5314;
+  --brand-950: #15290a;
+
+  // Gray color
+  --gray-25: #fcfcfd;
+  --gray-50: #f8fafc;
+  --gray-100: #eef2f6;
+  --gray-200: #e3e8ef;
+  --gray-300: #cdd5df;
+  --gray-400: #9aa4b2;
+  --gray-500: #697586;
+  --gray-600: #4b5565;
+  --gray-700: #364152;
+  --gray-800: #202939;
+  --gray-900: #121926;
+  --gray-950: #0d121c;
+
+  // Success color
+  --success-25: #f6fefc;
+  --success-50: #f0fdf9;
+  --success-100: #ccfbef;
+  --success-200: #99f6e0;
+  --success-300: #5fe9d0;
+  --success-400: #2ed3b7;
+  --success-500: #15b79e;
+  --success-600: #0e9384;
+  --success-700: #107569;
+  --success-800: #125d56;
+  --success-900: #134e48;
+  --success-950: #0a2926;
+
+  // Danger color
+  --danger-25: #fffbfa;
+  --danger-50: #fef3f2;
+  --danger-100: #fee4e2;
+  --danger-200: #fecdca;
+  --danger-300: #fda29b;
+  --danger-400: #f97066;
+  --danger-500: #f04438;
+  --danger-600: #d92d20;
+  --danger-700: #b42318;
+  --danger-800: #912018;
+  --danger-900: #7a271a;
+  --danger-950: #55160c;
+
+  // Info color
+  --info-25: #f5f8ff;
+  --info-50: #eef4ff;
+  --info-100: #e0eaff;
+  --info-200: #c7d7fe;
+  --info-300: #a4bcfd;
+  --info-400: #8098f9;
+  --info-500: #6172f3;
+  --info-600: #444ce7;
+  --info-700: #3538cd;
+  --info-800: #2d31a6;
+  --info-900: #2d3282;
+  --info-950: #1f235b;
+
+  // Warning color
+  --warning-25: #fefdf0;
+  --warning-50: #fefbe8;
+  --warning-100: #fef7c3;
+  --warning-200: #feee95;
+  --warning-300: #fde272;
+  --warning-400: #fac515;
+  --warning-500: #eaaa08;
+  --warning-600: #ca8504;
+  --warning-700: #a15c07;
+  --warning-800: #854a0e;
+  --warning-900: #713b12;
+  --warning-950: #542c0d;
+
+  // Spacing
+  --spacing-none: 0rem;
+  --spacing-xxs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.375rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 0.75rem;
+  --spacing-xl: 1rem;
+  --spacing-2xl: 1.25rem;
+  --spacing-3xl: 1.5rem;
+  --spacing-4xl: 2rem;
+  --spacing-5xl: 2.5rem;
+  --spacing-6xl: 3rem;
+  --spacing-7xl: 4rem;
+  --spacing-8xl: 5rem;
+  --spacing-9xl: 6rem;
+  --spacing-10xl: 8rem;
+  --spacing-11xl: 10rem;
+
+  // Radius
+  --radius-none: 0rem;
+  --radius-xxs: 0.125rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+
+  // Temp
+  --sidebar-width: 0;
+
+  // rgba
+  --gray-100-rgb: 238, 242, 246;
+}
+
+// scss ::-ms-value  // Base spacing
+$base-rems: 16px !default;
+
+// Base color
+$base-white: #ffffff !default;
+$base-black: #000000 !default;
+
+// brand color
+$brand-25: #fafef5 !default;
+$brand-50: #f3fee7 !default;
+$brand-100: #e6fcd0 !default;
+$brand-200: #d0f8ab !default;
+$brand-300: #a6ef67 !default;
+$brand-400: #85e13a !default;
+$brand-500: #66c61c !default;
+$brand-600: #4ca30d !default;
+$brand-700: #3b7c0f !default;
+$brand-800: #326212 !default;
+$brand-900: #2b5314 !default;
+$brand-950: #15290a !default;
+
+// Gray color
+$gray-25: #fcfcfd !default;
+$gray-50: #f8fafc !default;
+$gray-100: #eef2f6 !default;
+$gray-200: #e3e8ef !default;
+$gray-300: #cdd5df !default;
+$gray-400: #9aa4b2 !default;
+$gray-500: #697586 !default;
+$gray-600: #4b5565 !default;
+$gray-700: #364152 !default;
+$gray-800: #202939 !default;
+$gray-900: #121926 !default;
+$gray-950: #0d121c !default;
+
+// Success color
+$success-25: #f6fefc !default;
+$success-50: #f0fdf9 !default;
+$success-100: #ccfbef !default;
+$success-200: #99f6e0 !default;
+$success-300: #5fe9d0 !default;
+$success-400: #2ed3b7 !default;
+$success-500: #15b79e !default;
+$success-600: #0e9384 !default;
+$success-700: #107569 !default;
+$success-800: #125d56 !default;
+$success-900: #134e48 !default;
+$success-950: #0a2926 !default;
+
+// Danger color
+$danger-25: #fffbfa !default;
+$danger-50: #fef3f2 !default;
+$danger-100: #fee4e2 !default;
+$danger-200: #fecdca !default;
+$danger-300: #fda29b !default;
+$danger-400: #f97066 !default;
+$danger-500: #f04438 !default;
+$danger-600: #d92d20 !default;
+$danger-700: #b42318 !default;
+$danger-800: #912018 !default;
+$danger-900: #7a271a !default;
+$danger-950: #55160c !default;
+
+// Info color
+$info-25: #f5f8ff !default;
+$info-50: #eef4ff !default;
+$info-100: #e0eaff !default;
+$info-200: #c7d7fe !default;
+$info-300: #a4bcfd !default;
+$info-400: #8098f9 !default;
+$info-500: #6172f3 !default;
+$info-600: #444ce7 !default;
+$info-700: #3538cd !default;
+$info-800: #2d31a6 !default;
+$info-900: #2d3282 !default;
+$info-950: #1f235b !default;
+
+// Warning color
+$warning-25: #fefdf0 !default;
+$warning-50: #fefbe8 !default;
+$warning-100: #fef7c3 !default;
+$warning-200: #feee95 !default;
+$warning-300: #fde272 !default;
+$warning-400: #fac515 !default;
+$warning-500: #eaaa08 !default;
+$warning-600: #ca8504 !default;
+$warning-700: #a15c07 !default;
+$warning-800: #854a0e !default;
+$warning-900: #713b12 !default;
+$warning-950: #542c0d !default;
+
+// Spacing
+$spacing-none: 0rem !default;
+$spacing-xxs: 0.125rem !default;
+$spacing-xs: 0.25rem !default;
+$spacing-sm: 0.375rem !default;
+$spacing-md: 0.5rem !default;
+$spacing-lg: 0.75rem !default;
+$spacing-xl: 1rem !default;
+$spacing-2xl: 1.25rem !default;
+$spacing-3xl: 1.5rem !default;
+$spacing-4xl: 2rem !default;
+$spacing-5xl: 2.5rem !default;
+$spacing-6xl: 3rem !default;
+$spacing-7xl: 4rem !default;
+$spacing-8xl: 5rem !default;
+$spacing-9xl: 6rem !default;
+$spacing-10xl: 8rem !default;
+$spacing-11xl: 10rem !default;
+
+// Radius
+$radius-none: 0rem !default;
+$radius-xxs: 0.125rem !default;
+$radius-xs: 0.25rem !default;
+$radius-sm: 0.375rem !default;
+$radius-md: 0.5rem !default;
+$radius-lg: 0.625rem !default;
+$radius-xl: 0.75rem !default;
+$radius-2xl: 1rem !default;
+$radius-3xl: 1.25rem !default;
+$radius-4xl: 1.5rem !default;
+
+// Temp
+$sidebar-width: 0 !default;
+
+// rgba
+$gray-100-rgb: 238, 242, 246 !default;

@@ -1,0 +1,9 @@
+.responsive-container {
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+@media (min-width: 576px) {
+  .responsive-container {
+    padding: var(--spacing-4xl) !important;
+  }
+}
