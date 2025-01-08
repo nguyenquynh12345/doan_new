@@ -17,7 +17,7 @@ const UserManagement = () => {
   const [visibleDeleteModal, setVisibleDeleteModal] = useState(false);
   const [data, setData] = useState(null);
   const { initialState } = useSelector((state: RootState) => state.userManagementReducer);
-  const { deleteEntitySuccess, updateEntitySuccess } = initialState
+  const { deleteEntitySuccess, updateEntitySuccess } = initialState;
   const columns: Column[] = [
     { key: 'index', label: '#', _style: { textWrap: 'nowrap' } },
     {
@@ -42,10 +42,10 @@ const UserManagement = () => {
   }, [updateEntitySuccess, deleteEntitySuccess]);
 
   const listCashbackPolicy = useSelector(userManagementSelector.selectAll);
-  console.log(listCashbackPolicy);
 
   return (
     <>
+      <h2 className="mb-4 fw-bold text-24">Danh sách tài khoản</h2>
       <div>
         <CSmartTable
           noItemsLabel={
@@ -63,10 +63,24 @@ const UserManagement = () => {
             index: (_: any, index: number) => <td className="align-middle">{index + 1}</td>,
             userName: (item: any) => <td className="align-middle">{item.userName}</td>,
             email: (item: any) => <td className="align-middle">{item.email}</td>,
-            action: (item: any) => <td className="align-middle"><div className='d-flex gap-3'>
-              <EditIcon onClick={() => { setVisible(true); setData(item) }} />
-              <DeleteIcon onClick={() => { setVisibleDeleteModal(true); setData(item.id) }} /></div>
-            </td>,
+            action: (item: any) => (
+              <td className="align-middle">
+                <div className="d-flex gap-3">
+                  <EditIcon
+                    onClick={() => {
+                      setVisible(true);
+                      setData(item);
+                    }}
+                  />
+                  <DeleteIcon
+                    onClick={() => {
+                      setVisibleDeleteModal(true);
+                      setData(item.id);
+                    }}
+                  />
+                </div>
+              </td>
+            ),
           }}
           tableHeadProps={{
             className: 'table-head',

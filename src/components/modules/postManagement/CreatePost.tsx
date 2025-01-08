@@ -1,0 +1,195 @@
+import UploadWrapper from '@/components/shared/uploadComponents/UploadWrapper';
+import { CForm, CFormFeedback, CFormInput, CFormLabel, CRow, CCol, CImage, CFormTextarea } from '@coreui/react-pro';
+import { Formik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
+
+const CreatePost = () => {
+  interface ICreatePost {
+    thumbnail: string | undefined;
+    imageUrl: string | undefined;
+    roomName: string;
+    description: string;
+    price: string;
+  }
+
+  const initialValues: ICreatePost = {
+    thumbnail: undefined,
+    imageUrl: '',
+    roomName: '',
+    description: '',
+    price: '',
+  };
+
+  const [imageUrl, setThumbnailImage] = useState<string | undefined>('');
+
+  const validationSchema = Yup.object().shape({
+    // roomName: Yup.string().required('Tên là bắt buộc'),
+    // description: Yup.string().required('Mô tả là bắt buộc'),
+    // price: Yup.number().required('Giá là bắt buộc').positive('Giá phải là số dương'),
+    // imageUrl: Yup.mixed().required('Ảnh là bắt buộc'),
+  });
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileUpload = async (file: File) => {
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('http://localhost:3333/upload/image', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+      setUploading(false);
+
+      if (response.ok) {
+        return result.url;
+      } else {
+        throw new Error('Upload thất bại');
+      }
+    } catch (error) {
+      setUploading(false);
+      alert('Lỗi upload ảnh');
+      return null;
+    }
+  };
+
+  return (
+    <Formik
+      enableReinitialize
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={async (values) => {
+        console.log(values);
+
+        if (values.thumbnail) {
+          const uploadedUrl = await handleFileUpload(values.thumbnail as any);
+          if (uploadedUrl) {
+            values.imageUrl = uploadedUrl;
+          } else {
+            return;
+          }
+        }
+      }}
+    >
+      {({ values, errors, touched, handleChange, handleSubmit, setValues }) => (
+        <CForm onSubmit={handleSubmit} id="form-create-post">
+          <CRow className="py-3xl p-xxs">
+            <CCol md={4} className="mb-xl">
+              {imageUrl ? (
+                <div className="d-flex flex-column align-items-center">
+                  <CRow className="h-100 mb-2">
+                    <CImage src={imageUrl} className="w-100 h-100 thumbnail" alt="Thumbnail Preview" />
+                  </CRow>
+                  <span
+                    onClick={() => {
+                      setThumbnailImage('');
+                      setValues({ ...values, imageUrl: '' });
+                    }}
+                    className="text-brand-400 text-sm-semibold cursor-pointer"
+                  >
+                    Remove
+                  </span>
+                </div>
+              ) : (
+                <UploadWrapper
+                  className="w-100 cursor-pointer h-100 card rounded-3"
+                  disabled={false}
+                  id="thumbnail"
+                  name="thumbnail"
+                  multiple={false}
+                  onFileChange={(file) => {
+                    if (file) {
+                      setValues({ ...values, imageUrl: file?.url });
+                    }
+                    setThumbnailImage(file?.url);
+                  }}
+                >
+                  <div className="py-3 px-4 border-neutral-200 d-flex flex-column align-items-center justify-content-center rounded-xl text-center h-100">
+                    <p className="text-neutral-400 text-sm mb-1">
+                      <span className="text-brand-400 text-sm-semibold me-1">Upload Image</span>
+                      Drag and drop
+                    </p>
+                    <span className="text-neutral-400 text-sm">SVG, PNG, JPG or GIF (max. 800x400px)</span>
+                  </div>
+                </UploadWrapper>
+              )}
+              <CFormFeedback
+                invalid={!!errors.thumbnail && touched.thumbnail}
+                className={!!errors.thumbnail && touched.thumbnail ? 'd-block' : 'd-none'}
+              >
+                {errors.thumbnail}
+              </CFormFeedback>
+            </CCol>
+
+            <CCol md={8}>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="roomName">Tên phòng</CFormLabel>
+                <CFormInput
+                  value={values.roomName}
+                  onChange={handleChange}
+                  type="text"
+                  id="roomName"
+                  name="roomName"
+                  autoComplete="off"
+                  placeholder="Nhập tên phòng"
+                />
+                <CFormFeedback
+                  invalid={!!errors.roomName && touched.roomName}
+                  className={!!errors.roomName && touched.roomName ? 'd-block' : 'd-none'}
+                >
+                  {errors.roomName}
+                </CFormFeedback>
+              </div>
+
+              <div className="mb-xl">
+                <CFormLabel htmlFor="price">Giá</CFormLabel>
+                <CFormInput
+                  value={values.price}
+                  onChange={handleChange}
+                  type="text"
+                  id="price"
+                  name="price"
+                  autoComplete="off"
+                  placeholder="Nhập giá"
+                />
+                <CFormFeedback
+                  invalid={!!errors.price && touched.price}
+                  className={!!errors.price && touched.price ? 'd-block' : 'd-none'}
+                >
+                  {errors.price}
+                </CFormFeedback>
+              </div>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="description">Mô tả</CFormLabel>
+                <CFormTextarea
+                  value={values.description}
+                  onChange={handleChange}
+                  id="description"
+                  name="description"
+                  autoComplete="off"
+                  placeholder="Nhập giá"
+                />
+                <CFormFeedback
+                  invalid={!!errors.description && touched.description}
+                  className={!!errors.description && touched.description ? 'd-block' : 'd-none'}
+                >
+                  {errors.description}
+                </CFormFeedback>
+              </div>
+            </CCol>
+          </CRow>
+          <div className="text-end">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </CForm>
+      )}
+    </Formik>
+  );
+};
+
+export default CreatePost;

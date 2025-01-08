@@ -12,8 +12,8 @@ import TheLayout from './components/containers/TheLayout';
 import TheAuthLayout from './components/modules/auth/TheAuthLayout';
 import { authLayout } from './components/modules/auth/routes';
 import { RequireAuth } from './components/modules/auth/AuthComponents/RequireAuth';
-import UserManagement from './components/modules/userManagement/UserManagement';
 import UserManagementRoutes from './components/modules/userManagement/routes';
+import PostManagementRoutes from './components/modules/postManagement/routes';
 
 const Table = lazy(() => {
   return new Promise((resolve) => setTimeout(resolve, 3000)).then(() => import('./components/dummy/Table'));
@@ -33,6 +33,7 @@ export const privateRoutes: RouteObject[] = [
   { path: '', element: <TransferView route={''} /> },
   { path: 'dummy', element: <DummyLanding /> },
   { path: 'user-management/*', element: <UserManagementRoutes /> },
+  { path: 'post-management/*', element: <PostManagementRoutes /> },
   { path: 'table', element: <Table /> },
   { path: 'dashboard', element: <Dashboard /> },
   { path: 'theme/*', element: <ThemeRoutes /> },

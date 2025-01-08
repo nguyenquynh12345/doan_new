@@ -14,15 +14,25 @@ export interface SidebarItem {
 
 export const adminSidebarItems: SidebarItem[] = [
   {
-    name: 'Người dùng',
+    name: 'Quản lý người dùng',
     to: `user-management`,
     icon: <UserIcon className="nav-icon" />,
-    // subItems: [
-    //   {
-    //     name: 'Bill chuyển khoản',
-    //     to: `/billTransfer`,
-    //     icon: <DotIcon className="nav-icon" />,
-    //   },
-    // ],
+  },
+  {
+    name: 'Quản lý bài đăng',
+    to: `post-management`,
+    icon: <UserIcon className="nav-icon" />,
+    subItems: [
+      {
+        name: 'Tạo bài đăng',
+        to: `/create`,
+        icon: <DotIcon className="nav-icon" />,
+      },
+      {
+        name: 'Phê duyệt bài đăng',
+        to: `/create`,
+        icon: <DotIcon className="nav-icon" />,
+      },
+    ],
   },
 ];
