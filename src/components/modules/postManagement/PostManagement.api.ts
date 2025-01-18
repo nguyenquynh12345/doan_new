@@ -2,7 +2,7 @@ import { IParams } from '@/shared/shared-interfaces';
 import axiosFactory from '@/shared/config/axios-interceptor';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export interface IExpertSearchParams extends IParams {}
+export interface IExpertSearchParams extends IParams { }
 
 export const getEntities = createAsyncThunk(`get-list-post`, async (_, thunkAPI) => {
   try {
@@ -20,9 +20,9 @@ export const getEntitie = createAsyncThunk(`get-detail-post`, async (id: any, th
     return thunkAPI.rejectWithValue(error);
   }
 });
-export const createEntity = createAsyncThunk(`create-expert`, async (body: any, thunkAPI) => {
+export const createEntity = createAsyncThunk(`rooms-create`, async (body: any, thunkAPI) => {
   try {
-    const { data } = await axiosFactory.post(`apply-expert`, body);
+    const { data } = await axiosFactory.post(`rooms`, body);
     return data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error);
@@ -37,11 +37,27 @@ export const updateEntity = createAsyncThunk(`update-user`, async (body: any, th
   }
 });
 
-export const removeEntity = createAsyncThunk(`remove-user`, async (id: string, thunkAPI) => {
+export const removeEntity = createAsyncThunk(`remove-rooms`, async (id: string, thunkAPI) => {
   try {
-    await axiosFactory.delete(`users/${id}`);
+    await axiosFactory.delete(`rooms/${id}`);
     return id;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error);
+  }
+});
+export const uploadImage = createAsyncThunk(`upload/image`, async (body: { file: File }, thunkAPI) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', body.file);
+
+    const { data } = await axiosFactory.post(`upload/image`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response?.data || error.message);
   }
 });

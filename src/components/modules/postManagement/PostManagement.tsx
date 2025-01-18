@@ -60,7 +60,7 @@ const PostManagement = () => {
       <div>
         <CSmartTable
           onRowClick={(item: any) => {
-            navigate(`/post-management/${item.id}`);
+            navigate(`/post-management/detail/${item.id}`);
           }}
           noItemsLabel={
             <div
@@ -84,7 +84,7 @@ const PostManagement = () => {
                 <div className="d-flex gap-3">
                   <EditIcon
                     onClick={() => {
-                      navigate(`/post-management/${item.id}`);
+                      navigate(`/post-management/edit/${item.id}`);
                     }}
                   />
                   <DeleteIcon

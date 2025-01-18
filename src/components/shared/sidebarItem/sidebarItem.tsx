@@ -24,15 +24,30 @@ export const adminSidebarItems: SidebarItem[] = [
     icon: <UserIcon className="nav-icon" />,
     subItems: [
       {
+        name: 'Tất cả bài đăng',
+        to: `post-management`,
+        icon: <DotIcon className="nav-icon" />,
+      },
+      {
         name: 'Tạo bài đăng',
-        to: `/create`,
+        to: `post-management/create`,
         icon: <DotIcon className="nav-icon" />,
       },
       {
         name: 'Phê duyệt bài đăng',
-        to: `/create`,
+        to: `#`,
         icon: <DotIcon className="nav-icon" />,
       },
     ],
+  },
+  {
+    name: 'Phê duyệt yêu cầu thuê',
+    to: `rental-request`,
+    icon: <UserIcon className="nav-icon" />,
+  },
+  {
+    name: 'Feedback của khách hàng',
+    to: `feedback`,
+    icon: <UserIcon className="nav-icon" />,
   },
 ];

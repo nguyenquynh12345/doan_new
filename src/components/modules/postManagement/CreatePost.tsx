@@ -1,16 +1,22 @@
 import UploadWrapper from '@/components/shared/uploadComponents/UploadWrapper';
+import { AppDispatch } from '@/store';
 import { CForm, CFormFeedback, CFormInput, CFormLabel, CRow, CCol, CImage, CFormTextarea } from '@coreui/react-pro';
 import { Formik } from 'formik';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { createEntity, uploadImage } from './PostManagement.api';
 
 const CreatePost = () => {
+  const dispatch = useDispatch<AppDispatch>();
   interface ICreatePost {
     thumbnail: string | undefined;
     imageUrl: string | undefined;
     roomName: string;
     description: string;
     price: string;
+    address: string;
+    area: string
   }
 
   const initialValues: ICreatePost = {
@@ -19,9 +25,12 @@ const CreatePost = () => {
     roomName: '',
     description: '',
     price: '',
+    address: '',
+    area: ''
   };
 
   const [imageUrl, setThumbnailImage] = useState<string | undefined>('');
+  const [file, setFile] = useState<any>();
 
   const validationSchema = Yup.object().shape({
     // roomName: Yup.string().required('Tên là bắt buộc'),
@@ -29,32 +38,6 @@ const CreatePost = () => {
     // price: Yup.number().required('Giá là bắt buộc').positive('Giá phải là số dương'),
     // imageUrl: Yup.mixed().required('Ảnh là bắt buộc'),
   });
-  const [uploading, setUploading] = useState(false);
-
-  const handleFileUpload = async (file: File) => {
-    setUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await fetch('http://localhost:3333/upload/image', {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      setUploading(false);
-
-      if (response.ok) {
-        return result.url;
-      } else {
-        throw new Error('Upload thất bại');
-      }
-    } catch (error) {
-      setUploading(false);
-      alert('Lỗi upload ảnh');
-      return null;
-    }
-  };
 
   return (
     <Formik
@@ -62,16 +45,8 @@ const CreatePost = () => {
       validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={async (values) => {
-        console.log(values);
-
-        if (values.thumbnail) {
-          const uploadedUrl = await handleFileUpload(values.thumbnail as any);
-          if (uploadedUrl) {
-            values.imageUrl = uploadedUrl;
-          } else {
-            return;
-          }
-        }
+        const dataUrl = await dispatch(uploadImage(file));
+        dispatch(createEntity({ ...values, imageUrl: dataUrl.payload.filePath }));
       }}
     >
       {({ values, errors, touched, handleChange, handleSubmit, setValues }) => (
@@ -103,6 +78,7 @@ const CreatePost = () => {
                   onFileChange={(file) => {
                     if (file) {
                       setValues({ ...values, imageUrl: file?.url });
+                      setFile(file);
                     }
                     setThumbnailImage(file?.url);
                   }}
@@ -163,6 +139,42 @@ const CreatePost = () => {
                 </CFormFeedback>
               </div>
               <div className="mb-xl">
+                <CFormLabel htmlFor="address">Địa chỉ</CFormLabel>
+                <CFormInput
+                  value={values.address}
+                  onChange={handleChange}
+                  type="text"
+                  id="address"
+                  name="address"
+                  autoComplete="off"
+                  placeholder="Nhập địa chỉ"
+                />
+                <CFormFeedback
+                  invalid={!!errors.address && touched.address}
+                  className={!!errors.address && touched.address ? 'd-block' : 'd-none'}
+                >
+                  {errors.address}
+                </CFormFeedback>
+              </div>
+
+              <div className="mb-xl">
+                <CFormLabel htmlFor="area">Diện tích</CFormLabel>
+                <CFormInput
+                  value={values.area}
+                  onChange={handleChange}
+                  id="area"
+                  name="area"
+                  autoComplete="off"
+                  placeholder="Diện tích"
+                />
+                <CFormFeedback
+                  invalid={!!errors.area && touched.area}
+                  className={!!errors.area && touched.area ? 'd-block' : 'd-none'}
+                >
+                  {errors.area}
+                </CFormFeedback>
+              </div>
+              <div className="mb-xl">
                 <CFormLabel htmlFor="description">Mô tả</CFormLabel>
                 <CFormTextarea
                   value={values.description}
@@ -170,7 +182,7 @@ const CreatePost = () => {
                   id="description"
                   name="description"
                   autoComplete="off"
-                  placeholder="Nhập giá"
+                  placeholder="Nhập mô tả"
                 />
                 <CFormFeedback
                   invalid={!!errors.description && touched.description}

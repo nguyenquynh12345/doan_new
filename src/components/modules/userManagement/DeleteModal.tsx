@@ -34,7 +34,7 @@ const DeleteModal = (props: IModalProps) => {
                 </CModalHeader>
                 <CModalBody>
                     <div className="d-flex flex-column gap-xl ">
-
+                        1
                     </div>
                 </CModalBody>
                 <CModalFooter className="mt-3xl d-block">

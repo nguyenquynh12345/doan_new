@@ -14,6 +14,8 @@ import { authLayout } from './components/modules/auth/routes';
 import { RequireAuth } from './components/modules/auth/AuthComponents/RequireAuth';
 import UserManagementRoutes from './components/modules/userManagement/routes';
 import PostManagementRoutes from './components/modules/postManagement/routes';
+import RentalRequestRoutes from './components/modules/rentalRequest/routes';
+import FeedbackRoutes from './components/modules/feedback/routes';
 
 const Table = lazy(() => {
   return new Promise((resolve) => setTimeout(resolve, 3000)).then(() => import('./components/dummy/Table'));
@@ -34,6 +36,8 @@ export const privateRoutes: RouteObject[] = [
   { path: 'dummy', element: <DummyLanding /> },
   { path: 'user-management/*', element: <UserManagementRoutes /> },
   { path: 'post-management/*', element: <PostManagementRoutes /> },
+  { path: 'rental-request/*', element: <RentalRequestRoutes /> },
+  { path: 'feedback/*', element: <FeedbackRoutes /> },
   { path: 'table', element: <Table /> },
   { path: 'dashboard', element: <Dashboard /> },
   { path: 'theme/*', element: <ThemeRoutes /> },

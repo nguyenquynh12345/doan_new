@@ -1,6 +1,6 @@
 import { CCard, CCardBody, CCol, CContainer, CForm, CFormFeedback, CFormInput, CFormLabel, CLoadingButton, CRow } from "@coreui/react-pro";
 import { Formik } from "formik";
-import { ILoginForm, registerBill } from "./auth.api";
+import { registerBill } from "./auth.api";
 import { fetching, resetAll } from "./auth.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
