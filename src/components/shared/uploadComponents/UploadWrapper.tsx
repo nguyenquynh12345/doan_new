@@ -62,7 +62,7 @@ const UploadWrapper = <IsMulti extends boolean>(props: ISButtonUpload<IsMulti>) 
 
   return (
     <>
-      <CFormLabel className={`upload-wrapper ${className}`} htmlFor={id}>
+      <CFormLabel style={{ height: '320px' }} className={`upload-wrapper ${className}`} htmlFor={id}>
         {children}
         <CFormInput
           disabled={disabled}

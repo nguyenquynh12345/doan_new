@@ -12,6 +12,14 @@ export const getEntities = createAsyncThunk(`get-list-post`, async (_, thunkAPI)
     return thunkAPI.rejectWithValue(error);
   }
 });
+export const getCategoriesRoom = createAsyncThunk(`get-list-category-rooms`, async (_, thunkAPI) => {
+  try {
+    const { data } = await axiosFactory.get(`category-rooms`);
+    return data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 export const getEntitie = createAsyncThunk(`get-detail-post`, async (id: any, thunkAPI) => {
   try {
     const { data } = await axiosFactory.get(`rooms/${id}`);

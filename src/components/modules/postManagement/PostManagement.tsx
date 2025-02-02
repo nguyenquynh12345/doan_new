@@ -8,7 +8,7 @@ import DeleteIcon from '../../../assets/icon/delete.svg?react';
 import { RootState } from '@/reducers';
 import { getEntities } from './PostManagement.api';
 import { postManagementSelector } from './PostManagement.reducer';
-import { insertCommas } from '@/shared/utils/ultils';
+import { getEllipsisTxt, insertCommas } from '@/shared/utils/ultils';
 import DeleteModal from './DeleteModal';
 import { useRouter } from '@/shared/utils/hooks/useRouter';
 
@@ -53,6 +53,7 @@ const PostManagement = () => {
   }, [updateEntitySuccess, deleteEntitySuccess]);
 
   const listCashbackPolicy = useSelector(postManagementSelector.selectAll);
+  console.log(listCashbackPolicy);
 
   return (
     <>
@@ -60,7 +61,12 @@ const PostManagement = () => {
       <div>
         <CSmartTable
           onRowClick={(item: any) => {
-            navigate(`/post-management/detail/${item.id}`);
+            console.log(columns);
+            for (let i = 0; i < columns.length; i++) {
+              if (columns[i].key !== 'action') {
+                // navigate(`/post-management/edit/${item.id}`);
+              }
+            }
           }}
           noItemsLabel={
             <div
@@ -72,11 +78,11 @@ const PostManagement = () => {
           }
           clickableRows
           columns={columns}
-          items={listCashbackPolicy}
+          items={listCashbackPolicy[0] as any}
           scopedColumns={{
             index: (_: any, index: number) => <td className="align-middle">{index + 1}</td>,
-            roomName: (item: any) => <td className="align-middle">{item.roomName}</td>,
-            description: (item: any) => <td className="align-middle">{item.description}</td>,
+            roomName: (item: any) => <td className="align-middle">{getEllipsisTxt(item.roomName, 25)}</td>,
+            description: (item: any) => <td className="align-middle">{getEllipsisTxt(item.description, 25)}</td>,
             price: (item: any) => <td className="align-middle">{insertCommas(item.price)} VND</td>,
             status: (item: any) => <td className="align-middle">{item.status}</td>,
             action: (item: any) => (

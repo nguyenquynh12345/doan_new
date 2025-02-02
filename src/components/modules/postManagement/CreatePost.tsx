@@ -1,14 +1,22 @@
 import UploadWrapper from '@/components/shared/uploadComponents/UploadWrapper';
 import { AppDispatch } from '@/store';
-import { CForm, CFormFeedback, CFormInput, CFormLabel, CRow, CCol, CImage, CFormTextarea } from '@coreui/react-pro';
+import { CForm, CFormFeedback, CFormInput, CFormLabel, CRow, CCol, CImage, CFormTextarea, CFormSelect } from '@coreui/react-pro';
 import { Formik } from 'formik';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-import { createEntity, uploadImage } from './PostManagement.api';
+import { createEntity, getCategoriesRoom, uploadImage } from './PostManagement.api';
+import { RootState } from '@/reducers';
+import { useRouter } from '@/shared/utils/hooks/useRouter';
+import { resetAll } from './PostManagement.reducer';
+import { ToastSuccess } from '@/components/shared/toast/Toast';
 
 const CreatePost = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { userInfo } = useSelector((state: RootState) => state.authentication);
+  const { initialState } = useSelector((state: RootState) => state.postManagementReducer);
+  const { categoryRoom, updateEntitySuccess } = initialState;
+  const { navigate } = useRouter();
   interface ICreatePost {
     thumbnail: string | undefined;
     imageUrl: string | undefined;
@@ -16,7 +24,13 @@ const CreatePost = () => {
     description: string;
     price: string;
     address: string;
-    area: string
+    capacity: string;
+    userId: string;
+    utilities: string;
+    waterPrice: string;
+    electricityPrice: string;
+    categories: number;
+    region: string;
   }
 
   const initialValues: ICreatePost = {
@@ -26,19 +40,33 @@ const CreatePost = () => {
     description: '',
     price: '',
     address: '',
-    area: ''
+    capacity: '',
+    userId: userInfo?.id || '0',
+    utilities: '',
+    waterPrice: '',
+    categories: 0,
+    electricityPrice: '',
+    region: ''
   };
 
   const [imageUrl, setThumbnailImage] = useState<string | undefined>('');
   const [file, setFile] = useState<any>();
-
+  useEffect(() => {
+    dispatch(getCategoriesRoom());
+  }, [])
   const validationSchema = Yup.object().shape({
     // roomName: Yup.string().required('Tên là bắt buộc'),
     // description: Yup.string().required('Mô tả là bắt buộc'),
     // price: Yup.number().required('Giá là bắt buộc').positive('Giá phải là số dương'),
     // imageUrl: Yup.mixed().required('Ảnh là bắt buộc'),
   });
-
+  useEffect(() => {
+    if (updateEntitySuccess) {
+      navigate('/post-management');
+      ToastSuccess('Tạo bài viết thành công');
+      dispatch(resetAll());
+    }
+  }, [updateEntitySuccess])
   return (
     <Formik
       enableReinitialize
@@ -55,8 +83,8 @@ const CreatePost = () => {
             <CCol md={4} className="mb-xl">
               {imageUrl ? (
                 <div className="d-flex flex-column align-items-center">
-                  <CRow className="h-100 mb-2">
-                    <CImage src={imageUrl} className="w-100 h-100 thumbnail" alt="Thumbnail Preview" />
+                  <CRow className=" mb-2">
+                    <CImage src={imageUrl} className="w-100 thumbnail" alt="Thumbnail Preview" />
                   </CRow>
                   <span
                     onClick={() => {
@@ -70,7 +98,8 @@ const CreatePost = () => {
                 </div>
               ) : (
                 <UploadWrapper
-                  className="w-100 cursor-pointer h-100 card rounded-3"
+                  className="w-100 cursor-pointer  card rounded-3"
+
                   disabled={false}
                   id="thumbnail"
                   name="thumbnail"
@@ -119,7 +148,27 @@ const CreatePost = () => {
                   {errors.roomName}
                 </CFormFeedback>
               </div>
-
+              {/* <CFormLabel htmlFor="categories">Danh mục</CFormLabel>
+              <div className="mb-xl">
+                <CFormSelect name="categories" onChange={handleChange} className="w-100">
+                  <option value="">Chọn danh mục phòng</option>
+                  {
+                    categoryRoom?.map((item: any) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))
+                  }
+                </CFormSelect>
+              </div> */}
+              <div className="mb-xl">
+                <CFormLabel htmlFor="region">Khu vực</CFormLabel>
+                <CFormSelect name="region" onChange={handleChange} options={[{ label: 'Khu vực', value: '' }, { label: 'Bắc từ liêm', value: '1' }, { label: 'Nam từ liêm', value: '2' }, { label: 'Đống đa', value: '3' }, { label: 'Cầu giấy', value: '4' }, { label: 'Hoàng mai', value: '5' }]} />
+              </div>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="categories">Danh mục</CFormLabel>
+                <CFormSelect name="categories" onChange={handleChange} options={[{ label: 'Nhà cấp 4', value: 'otp1' }, { label: 'Chung cư mini', value: 'otp2' }, { label: 'Chung cư', value: 'otp3' }, { label: 'Nhà nguyên căn', value: 'otp4' }]} />
+              </div>
               <div className="mb-xl">
                 <CFormLabel htmlFor="price">Giá</CFormLabel>
                 <CFormInput
@@ -158,20 +207,71 @@ const CreatePost = () => {
               </div>
 
               <div className="mb-xl">
-                <CFormLabel htmlFor="area">Diện tích</CFormLabel>
+                <CFormLabel htmlFor="capacity">Diện tích</CFormLabel>
                 <CFormInput
-                  value={values.area}
+                  value={values.capacity}
                   onChange={handleChange}
-                  id="area"
-                  name="area"
+                  id="capacity"
+                  name="capacity"
                   autoComplete="off"
                   placeholder="Diện tích"
                 />
                 <CFormFeedback
-                  invalid={!!errors.area && touched.area}
-                  className={!!errors.area && touched.area ? 'd-block' : 'd-none'}
+                  invalid={!!errors.capacity && touched.capacity}
+                  className={!!errors.capacity && touched.capacity ? 'd-block' : 'd-none'}
                 >
-                  {errors.area}
+                  {errors.capacity}
+                </CFormFeedback>
+              </div>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="electricityPrice">Giá điện</CFormLabel>
+                <CFormInput
+                  value={values.electricityPrice}
+                  onChange={handleChange}
+                  id="electricityPrice"
+                  name="electricityPrice"
+                  autoComplete="off"
+                  placeholder="Giá điện"
+                />
+                <CFormFeedback
+                  invalid={!!errors.electricityPrice && touched.electricityPrice}
+                  className={!!errors.electricityPrice && touched.electricityPrice ? 'd-block' : 'd-none'}
+                >
+                  {errors.electricityPrice}
+                </CFormFeedback>
+              </div>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="waterPrice">Giá nước</CFormLabel>
+                <CFormInput
+                  value={values.waterPrice}
+                  onChange={handleChange}
+                  id="waterPrice"
+                  name="waterPrice"
+                  autoComplete="off"
+                  placeholder="Giá nước"
+                />
+                <CFormFeedback
+                  invalid={!!errors.waterPrice && touched.waterPrice}
+                  className={!!errors.waterPrice && touched.waterPrice ? 'd-block' : 'd-none'}
+                >
+                  {errors.waterPrice}
+                </CFormFeedback>
+              </div>
+              <div className="mb-xl">
+                <CFormLabel htmlFor="utilities">Tiện ích</CFormLabel>
+                <CFormInput
+                  value={values.utilities}
+                  onChange={handleChange}
+                  id="utilities"
+                  name="utilities"
+                  autoComplete="off"
+                  placeholder="Tiện ích"
+                />
+                <CFormFeedback
+                  invalid={!!errors.utilities && touched.utilities}
+                  className={!!errors.utilities && touched.utilities ? 'd-block' : 'd-none'}
+                >
+                  {errors.utilities}
                 </CFormFeedback>
               </div>
               <div className="mb-xl">

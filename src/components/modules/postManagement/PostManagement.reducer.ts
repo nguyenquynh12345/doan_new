@@ -2,7 +2,7 @@ import { RootState } from '@/reducers';
 import { PayloadAction, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { IUser } from '@/shared/model/user.model';
-import { createEntity, getEntitie, getEntities, removeEntity, updateEntity } from './PostManagement.api';
+import { createEntity, getCategoriesRoom, getEntitie, getEntities, removeEntity, updateEntity } from './PostManagement.api';
 import { IInitialState } from '@/shared/shared-interfaces';
 
 export const initialExpertFilter = {
@@ -11,6 +11,7 @@ export const initialExpertFilter = {
 };
 interface IInitialPostState extends IInitialState {
   detailPost: any;
+  categoryRoom: any;
 }
 const initialState: IInitialPostState = {
   fetchEntitiesSuccess: false,
@@ -23,6 +24,7 @@ const initialState: IInitialPostState = {
   totalItems: 0,
   totalPages: 0,
   detailPost: null,
+  categoryRoom: null,
 };
 
 export const expertAdapter = createEntityAdapter({
@@ -79,6 +81,18 @@ const { actions, reducer } = createSlice({
     });
     builder.addCase(getEntitie.rejected.type, (state, { payload }: PayloadAction<any>) => {
       state.initialState.errorMessage = payload?.message;
+      state.initialState.errorCode = payload?.code;
+      state.initialState.fetchEntitiesSuccess = false;
+      state.initialState.loading = false;
+    });
+    builder.addCase(getCategoriesRoom.fulfilled.type, (state, { payload }: PayloadAction<any>) => {
+      state.initialState.categoryRoom = payload;
+      state.initialState.fetchEntitiesSuccess = true;
+      state.initialState.loading = false;
+    });
+    builder.addCase(getCategoriesRoom.rejected.type, (state, { payload }: PayloadAction<any>) => {
+      state.initialState.errorMessage = payload?.message;
+      state.initialState.categoryRoom = null;
       state.initialState.errorCode = payload?.code;
       state.initialState.fetchEntitiesSuccess = false;
       state.initialState.loading = false;
