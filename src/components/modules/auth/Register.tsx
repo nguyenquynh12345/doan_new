@@ -1,6 +1,6 @@
 import { CCard, CCardBody, CCol, CContainer, CForm, CFormFeedback, CFormInput, CFormLabel, CLoadingButton, CRow } from "@coreui/react-pro";
 import { Formik } from "formik";
-import { registerBill } from "./auth.api";
+import { ILoginForm, registerBill } from "./auth.api";
 import { fetching, resetAll } from "./auth.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
@@ -22,7 +22,7 @@ const Register = () => {
       dispatch(resetAll())
     }
   }, [registerSuccess])
-  const initialValues = { userName: '', password: '', email: 'test@gmail.com' };
+  const initialValues: ILoginForm = { name: '', password: '', email: '', phone: '', role: 'owner' };
   const { t } = useTranslation();
   const validationSchema = Yup.object().shape({
   });
@@ -55,21 +55,38 @@ const Register = () => {
                             <CFormLabel>{t('app.global.form.label.username')}</CFormLabel>
 
                             <CFormInput
-                              value={values.userName}
+                              value={values.name}
                               onChange={handleChange}
                               type="text"
-                              id="userName"
-                              name="userName"
+                              id="name"
+                              name="name"
                               autoComplete="none"
                             />
                             <CFormFeedback
                               invalid
-                              className={!!errors.userName && touched.userName ? 'd-block' : 'd-none'}
+                              className={!!errors.name && touched.name ? 'd-block' : 'd-none'}
                             >
-                              {errors.userName}
+                              {errors.name}
                             </CFormFeedback>
                           </div>
+                          <div className="mb-xl">
+                            <CFormLabel>Eamil</CFormLabel>
 
+                            <CFormInput
+                              value={values.email}
+                              onChange={handleChange}
+                              type="text"
+                              id="email"
+                              name="email"
+                              autoComplete="none"
+                            />
+                            <CFormFeedback
+                              invalid
+                              className={!!errors.email && touched.email ? 'd-block' : 'd-none'}
+                            >
+                              {errors.email}
+                            </CFormFeedback>
+                          </div>
                           <div>
                             <CFormLabel>{t('app.global.form.label.password')}</CFormLabel>
                             <CFormInput

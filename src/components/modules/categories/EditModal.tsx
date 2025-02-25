@@ -18,8 +18,8 @@ import { Formik } from 'formik';
 import { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { fetching, resetAll } from './UserManagement.reducer';
-import { updateEntity } from './UserManagement.api';
+import { fetching, resetAll } from './categoriesManagement.reducer';
+import { updateEntity } from './cateogries.api';
 interface IModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
@@ -32,7 +32,6 @@ const ModalEditUser = (props: IModalProps) => {
   const initialValues = { id: data?.id, name: '', email: '', phone: '' };
   const validationSchema = Yup.object().shape({
     name: Yup.string().trim().required('1'),
-    password: Yup.string().trim().required('1'),
   });
   const onClose = () => {
     setVisible(false);
@@ -77,37 +76,6 @@ const ModalEditUser = (props: IModalProps) => {
                         />
                         <CFormFeedback invalid className={!!errors.name && touched.name ? 'd-block' : 'd-none'}>
                           {errors.name as any}
-                        </CFormFeedback>
-                      </div>
-                      <div className="mb-xl">
-                        <CFormLabel>Email</CFormLabel>
-                        <CFormInput
-                          value={values.email}
-                          onChange={handleChange}
-                          type="text"
-                          id="email"
-                          disabled
-                          name="email"
-                          autoComplete="none"
-                          placeholder="Nhập email"
-                        />
-                        <CFormFeedback invalid className={!!errors.email && touched.email ? 'd-block' : 'd-none'}>
-                          {errors.email as any}
-                        </CFormFeedback>
-                      </div>
-                      <div className="mb-xl">
-                        <CFormLabel>Số điện thoại</CFormLabel>
-                        <CFormInput
-                          value={values.phone}
-                          onChange={handleChange}
-                          type="text"
-                          id="phone"
-                          name="phone"
-                          autoComplete="none"
-                          placeholder="Nhập phone"
-                        />
-                        <CFormFeedback invalid className={!!errors.phone && touched.phone ? 'd-block' : 'd-none'}>
-                          {errors.phone as any}
                         </CFormFeedback>
                       </div>
                     </div>

@@ -33,16 +33,21 @@ export const adminSidebarItems: SidebarItem[] = [
         to: `post-management/create`,
         icon: <DotIcon className="nav-icon" />,
       },
-      {
-        name: 'Phê duyệt bài đăng',
-        to: `#`,
-        icon: <DotIcon className="nav-icon" />,
-      },
     ],
   },
   {
-    name: 'Phê duyệt yêu cầu thuê',
+    name: 'Phê duyệt bài đăng',
     to: `rental-request`,
+    icon: <UserIcon className="nav-icon" />,
+  },
+  {
+    name: 'Quản lý danh mục',
+    to: `categories`,
+    icon: <UserIcon className="nav-icon" />,
+  },
+  {
+    name: 'Quản lý khu vực',
+    to: `location`,
     icon: <UserIcon className="nav-icon" />,
   },
   {

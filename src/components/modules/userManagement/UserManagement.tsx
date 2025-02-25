@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import EditIcon from '../../../assets/icon/edit.svg?react';
 import DeleteIcon from '../../../assets/icon/delete.svg?react';
 import { getEntities } from './UserManagement.api';
-import { userManagementSelector } from './UserManagement.reducer';
+import { resetAll, userManagementSelector } from './UserManagement.reducer';
 import ModalEditUser from './EditModal';
 import { RootState } from '@/reducers';
 import DeleteModal from './DeleteModal';
+import { ToastSuccess } from '@/components/shared/toast/Toast';
 
 const UserManagement = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,7 +22,7 @@ const UserManagement = () => {
   const columns: Column[] = [
     { key: 'index', label: '#', _style: { textWrap: 'nowrap' } },
     {
-      key: 'userName',
+      key: 'name',
       label: 'Tên',
       _style: { textWrap: 'nowrap' },
     },
@@ -31,12 +32,27 @@ const UserManagement = () => {
       _style: { textWrap: 'nowrap' },
     },
     {
+      key: 'phone',
+      label: 'phone',
+      _style: { textWrap: 'nowrap' },
+    },
+    {
+      key: 'role',
+      label: 'role',
+      _style: { textWrap: 'nowrap' },
+    },
+    {
       key: 'action',
       label: 'action',
       _style: { textWrap: 'nowrap' },
     },
   ];
-
+  useEffect(() => {
+    if (updateEntitySuccess) {
+      ToastSuccess('Cập nhật thành công');
+      dispatch(resetAll());
+    }
+  }, [updateEntitySuccess]);
   useEffect(() => {
     dispatch(getEntities());
   }, [updateEntitySuccess, deleteEntitySuccess]);

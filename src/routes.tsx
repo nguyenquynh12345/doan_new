@@ -16,6 +16,8 @@ import UserManagementRoutes from './components/modules/userManagement/routes';
 import PostManagementRoutes from './components/modules/postManagement/routes';
 import RentalRequestRoutes from './components/modules/rentalRequest/routes';
 import FeedbackRoutes from './components/modules/feedback/routes';
+import CategoryManagementRoutes from './components/modules/categories/routes';
+import LocationManagementRoutes from './components/modules/location/routes';
 
 const Table = lazy(() => {
   return new Promise((resolve) => setTimeout(resolve, 3000)).then(() => import('./components/dummy/Table'));
@@ -37,6 +39,8 @@ export const privateRoutes: RouteObject[] = [
   { path: 'user-management/*', element: <UserManagementRoutes /> },
   { path: 'post-management/*', element: <PostManagementRoutes /> },
   { path: 'rental-request/*', element: <RentalRequestRoutes /> },
+  { path: 'categories/*', element: <CategoryManagementRoutes /> },
+  { path: 'location/*', element: <LocationManagementRoutes /> },
   { path: 'feedback/*', element: <FeedbackRoutes /> },
   { path: 'table', element: <Table /> },
   { path: 'dashboard', element: <Dashboard /> },

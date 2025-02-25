@@ -39,15 +39,12 @@ const UpdatePost = () => {
         address: '',
         area: ''
     };
+    console.log(detailPost?.images[0].url);
 
-    const [imageUrl, setThumbnailImage] = useState<string | undefined>(`http://localhost:3333${detailPost?.imageUrl}`);
+    const [imageUrl, setThumbnailImage] = useState<string | undefined>(`http://localhost:3333${detailPost?.images[0].url}`);
     const [file, setFile] = useState<any>();
 
     const validationSchema = Yup.object().shape({
-        // roomName: Yup.string().required('Tên là bắt buộc'),
-        // description: Yup.string().required('Mô tả là bắt buộc'),
-        // price: Yup.number().required('Giá là bắt buộc').positive('Giá phải là số dương'),
-        // imageUrl: Yup.mixed().required('Ảnh là bắt buộc'),
     });
 
     return (
@@ -112,24 +109,23 @@ const UpdatePost = () => {
                                 {errors.thumbnail as any}
                             </CFormFeedback>
                         </CCol>
-
                         <CCol md={8}>
                             <div className="mb-xl">
-                                <CFormLabel htmlFor="roomName">Tên phòng</CFormLabel>
+                                <CFormLabel htmlFor="title">Tên phòng</CFormLabel>
                                 <CFormInput
-                                    value={values.roomName}
+                                    value={values.title}
                                     onChange={handleChange}
                                     type="text"
-                                    id="roomName"
-                                    name="roomName"
+                                    id="title"
+                                    name="title"
                                     autoComplete="off"
                                     placeholder="Nhập tên phòng"
                                 />
                                 <CFormFeedback
-                                    invalid={!!errors.roomName && touched.roomName as any}
-                                    className={!!errors.roomName && touched.roomName ? 'd-block' : 'd-none'}
+                                    invalid={!!errors.title && touched.title as any}
+                                    className={!!errors.title && touched.title ? 'd-block' : 'd-none'}
                                 >
-                                    {errors.roomName as any}
+                                    {errors.title as any}
                                 </CFormFeedback>
                             </div>
 

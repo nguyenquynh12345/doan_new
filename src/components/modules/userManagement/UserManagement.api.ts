@@ -6,21 +6,13 @@ export interface IExpertSearchParams extends IParams { }
 
 export const getEntities = createAsyncThunk(`get-list-user`, async (_, thunkAPI) => {
   try {
-    const { data } = await axiosFactory.get(`users/list`);
+    const { data } = await axiosFactory.get(`users`);
     return data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error);
   }
 });
 
-export const createEntity = createAsyncThunk(`create-expert`, async (body: any, thunkAPI) => {
-  try {
-    const { data } = await axiosFactory.post(`apply-expert`, body);
-    return data;
-  } catch (error: any) {
-    return thunkAPI.rejectWithValue(error);
-  }
-});
 export const updateEntity = createAsyncThunk(`update-user`, async (body: any, thunkAPI) => {
   try {
     const { data } = await axiosFactory.put(`users/${body.id}`, body);

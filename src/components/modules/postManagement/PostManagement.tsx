@@ -22,7 +22,7 @@ const PostManagement = () => {
   const columns: Column[] = [
     { key: 'index', label: '#', _style: { textWrap: 'nowrap' } },
     {
-      key: 'roomName',
+      key: 'title',
       label: 'Tên Phòng',
       _style: { textWrap: 'nowrap' },
     },
@@ -37,13 +37,23 @@ const PostManagement = () => {
       _style: { textWrap: 'nowrap' },
     },
     {
-      key: 'status',
+      key: 'address',
+      label: 'Địa chỉ',
+      _style: { textWrap: 'nowrap' },
+    },
+    {
+      key: 'area',
+      label: 'diện tích',
+      _style: { textWrap: 'nowrap' },
+    },
+    {
+      key: 'available',
       label: 'Trạng thái',
       _style: { textWrap: 'nowrap' },
     },
     {
       key: 'action',
-      label: '',
+      label: 'Thao tác',
       _style: { textWrap: 'nowrap' },
     },
   ];
@@ -53,21 +63,12 @@ const PostManagement = () => {
   }, [updateEntitySuccess, deleteEntitySuccess]);
 
   const listCashbackPolicy = useSelector(postManagementSelector.selectAll);
-  console.log(listCashbackPolicy);
 
   return (
     <>
       <h2 className="mb-4 fw-bold text-24">Danh sách bài viết</h2>
       <div>
         <CSmartTable
-          onRowClick={(item: any) => {
-            console.log(columns);
-            for (let i = 0; i < columns.length; i++) {
-              if (columns[i].key !== 'action') {
-                // navigate(`/post-management/edit/${item.id}`);
-              }
-            }
-          }}
           noItemsLabel={
             <div
               className="d-flex align-items-center justify-content-center flex-column gap-xl"
@@ -78,13 +79,13 @@ const PostManagement = () => {
           }
           clickableRows
           columns={columns}
-          items={listCashbackPolicy[0] as any}
+          items={listCashbackPolicy}
           scopedColumns={{
             index: (_: any, index: number) => <td className="align-middle">{index + 1}</td>,
-            roomName: (item: any) => <td className="align-middle">{getEllipsisTxt(item.roomName, 25)}</td>,
+            title: (item: any) => <td className="align-middle">{getEllipsisTxt(item.title, 25)}</td>,
             description: (item: any) => <td className="align-middle">{getEllipsisTxt(item.description, 25)}</td>,
             price: (item: any) => <td className="align-middle">{insertCommas(item.price)} VND</td>,
-            status: (item: any) => <td className="align-middle">{item.status}</td>,
+            available: (item: any) => <td className="align-middle">{item.available == 1 ? 'Hoạt động' : 'Khóa'}</td>,
             action: (item: any) => (
               <td className="align-middle">
                 <div className="d-flex gap-3">

@@ -20,9 +20,9 @@ const DetailPost = () => {
   return (
     <div>
       <div className="d-flex flex-column gap-3">
-        <img width={400} src={"http://localhost:3333" + detailPost?.imageUrl} alt="" />
+        {/* <img width={400} src={"http://localhost:3333" + detailPost?.images[0]} alt="" /> */}
         <span className="fw-medium fs-5">
-          {detailPost?.roomName} - {detailPost?.price} VND
+          {detailPost?.title} - {detailPost?.price} VND
         </span>
         <p>{detailPost?.description}</p>
         <p></p>
