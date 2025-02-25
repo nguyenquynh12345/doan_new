@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/store';
 import { Column } from '@coreui/react-pro/dist/esm/components/table/types';
 import { useEffect, useState } from 'react';
-import EditIcon from '../../../assets/icon/edit.svg?react';
 import DeleteIcon from '../../../assets/icon/delete.svg?react';
 import { RootState } from '@/reducers';
 
 import { getEllipsisTxt, insertCommas } from '@/shared/utils/ultils';
 import { useRouter } from '@/shared/utils/hooks/useRouter';
 import { approved, unapproved } from '../postManagement/PostManagement.api';
-import { postManagementSelector } from '../postManagement/PostManagement.reducer';
 const PostManagement = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [visibleDeleteModal, setVisibleDeleteModal] = useState(false);
